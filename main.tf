@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "my-test-bucket" {
 # }
 
 # Uploads object to S3 bucket (example)
-# resource "aws_s3_bucket_object" "object" {
+# resource "aws_s3_object" "object" {
 #   bucket = aws_s3_bucket.my-test-bucket-referenced.id
 #   key    = var.s3objectkey
 #   source = var.sourcepath
@@ -49,4 +49,10 @@ resource "aws_s3_bucket" "my-test-bucket" {
 # resource "aws_s3_bucket_acl" "my-test-bucket-acl" {
 #   bucket = aws_s3_bucket.my-test-bucket-referenced.id
 #   acl    = "private"
+# }
+
+# S3 Bucket from a local module
+# module "my-bucket-module" {
+#   source = "./modules/my-module"
+#   bucketname = "tfdemo20220918-mymodulevariablebucket-overriden"
 # }
