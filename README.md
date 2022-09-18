@@ -19,11 +19,21 @@ To make use of this setup you will need:
   - Remember to **never** share these keys publicly!
   - Replace these arguments for safer alternatives if you know what you are doing!
 
----
-
 ## What you can do
 
+These were the steps I used to demonstrate the absolute basics, so feel free to explore Terraform in your own way, like adding additional services (be mindful of AWS billing charges, however.)
+
 1. Run `terraform init` at root level
+2. Run `terraform plan`
+3. Run `terraform apply` to provision the S3 bucket
+4. Change the bucket name in main.tf and save
+5. Run `terraform plan` and `terraform apply` to update the infrastructure
+6. Uncomment the other S3 bucket and S3 Object
+7. Run `terraform plan` and `terraform apply` to add to the infrastructure
+8. Delete the S3 Object or modify the S3 buckets to simulate changes
+9. Run `terraform plan` and `terraform apply` to update the infrastructure
+10. Delete everything by running `terraform destroy`
+
 
 ## Other commands to explore
 
