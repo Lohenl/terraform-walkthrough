@@ -9,7 +9,7 @@ Feel free to use this to explore how to work with `terraform init`, `terraform p
 ## Getting started
 
 To make use of this setup you will need:
-- Terraform installed in your OS [[Link](https://learn.hashicorp.com/tutorials/terraform/install-cli)]
+- Terraform installed in your OS [[Instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)]
 - An IDE of your choice (I use [Visual Studio Code](https://code.visualstudio.com/) with the [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform))
 - An AWS account
 - An IAM user
