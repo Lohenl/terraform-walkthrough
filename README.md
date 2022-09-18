@@ -15,6 +15,9 @@ To make use of this setup you will need:
 - An IAM user
   - Programmatic access for using access and secret keys
   - S3FullAccess permissions (The more restrictive the safer)
+- Replace the access_key and secret_key values with your keys in `main.tf`
+  - Remember to **never** share these keys publicly!
+  - Replace these arguments for safer alternatives if you know what you are doing!
 
 ---
 
