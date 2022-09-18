@@ -19,5 +19,6 @@ variable "sourcepath" {
 variable "sensitivevalue" {
     type = string
     description = "Example of a sensitive value"
+    default = "secret"
     sensitive = true
 }

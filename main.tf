@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "my-test-bucket-referenced" {
 
 # Uploads object to S3 bucket (example)
 resource "aws_s3_bucket_object" "object" {
-  bucket = aws_s3_bucket.my-test-bucket.id
+  bucket = aws_s3_bucket.my-test-bucket-referenced.id
   key    = var.s3objectkey
   source = var.sourcepath
 
@@ -47,6 +47,6 @@ resource "aws_s3_bucket_object" "object" {
 
 # S3 ACL for demo bucket to allow PUT access with key
 resource "aws_s3_bucket_acl" "my-test-bucket-acl" {
-  bucket = aws_s3_bucket.my-test-bucket.id
+  bucket = aws_s3_bucket.my-test-bucket-referenced.id
   acl    = "private"
 }
