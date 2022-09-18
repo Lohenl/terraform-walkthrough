@@ -1,5 +1,4 @@
-terraform-walkthrough
-===
+# terraform-walkthrough
 
 This is a simple Terraform project used for a walkthrough to set up an AWS S3 bucket.
 
@@ -7,10 +6,11 @@ Feel free to use this to explore how to work with `terraform init`, `terraform p
 
 ---
 
-Getting started
----
+## Getting started
 
 To make use of this setup you will need:
+- Terraform installed in your OS [[Link](https://learn.hashicorp.com/tutorials/terraform/install-cli)]
+- An IDE of your choice (I use [Visual Studio Code](https://code.visualstudio.com/) with the [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform))
 - An AWS account
 - An IAM user
   - Programmatic access for using access and secret keys
@@ -21,8 +21,11 @@ To make use of this setup you will need:
 
 ---
 
-Other commands to explore
----
+## What you can do
+
+1. Run `terraform init` at root level
+
+## Other commands to explore
 
 - `terraform validate` - Validates HCL scripts without referencing the terraform state, essentially a syntax check
 - `terraform refresh` - Updates state (which automatically runs with `plan` and `update` by default)
