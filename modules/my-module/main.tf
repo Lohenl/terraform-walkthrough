@@ -28,11 +28,11 @@ resource "aws_s3_bucket_acl" "my-test-bucket-acl" {
 
 # You need to export values to other modules using the output block
 output "bucketID" {
-  value = aws_s3_bucket.my-bucket.id
+  value       = aws_s3_bucket.my-bucket.id
   description = "Terraform-managed ID for the S3 bucket in this module"
 }
 
 output "sensitivevalue" {
-  value = var.sensitivevalue
+  value       = var.sensitivevalue
   description = "Example of an exported sensiive value"
 }

@@ -9,10 +9,14 @@ terraform {
 
 # Configure the AWS Provider (access and secret keys should be hidden)
 provider "aws" {
-  region = "ap-southeast-1"
+  region     = "ap-southeast-1"
   access_key = "your-access-key-here"
   secret_key = "your-secret-key-here"
 }
+
+###################################
+## PART 1: THE VERY BASIC BUCKET ##
+###################################
 
 # Basic S3 bucket
 resource "aws_s3_bucket" "my-test-bucket" {
@@ -22,6 +26,16 @@ resource "aws_s3_bucket" "my-test-bucket" {
     Environment = "Dev"
   }
 }
+
+# Outputs for all the different bucket names (comment/uncomment where needed)
+output "my-test-bucket-id" {
+  value       = aws_s3_bucket.my-test-bucket.id
+  description = "Bucket A's terraform ID"
+}
+
+#######################
+## PART 2: VARIABLES ##
+#######################
 
 # Basic S3 bucket with variable reference (Let's call this Bucket B)
 # resource "aws_s3_bucket" "my-test-bucket-referenced" {
@@ -44,41 +58,38 @@ resource "aws_s3_bucket" "my-test-bucket" {
 #   # etag = filemd5("path/to/file")
 # }
 
-
 # S3 ACL for S3 Bucket B
 # resource "aws_s3_bucket_acl" "my-test-bucket-acl" {
 #   bucket = aws_s3_bucket.my-test-bucket-referenced.id
 #   acl    = "private"
 # }
 
-# S3 Bucket from a local module (Let's call this bucket C)
-# module "my-bucket-module" {
-#   source = "./modules/my-module"
-#   bucketname = "tfdemo20220918-mymodulevariablebucket-overriden"
-# }
-
-# Outputs for all the different bucket names (comment/uncomment where needed)
-# output "my-test-bucket-id" {
-#   value = aws_s3_bucket.my-test-bucket.id
-#   description = "Bucket A's terraform ID"
-# }
-
 # Uncomment when the Bucket B is uncommented
 # output "my-test-bucket-referenced-id" {
-#   value = aws_s3_bucket.my-test-bucket-referenced.id
+#   value       = aws_s3_bucket.my-test-bucket-referenced.id
 #   description = "Bucket B's terraform ID"
+# }
+
+#########################
+## PART 3: FROM MODULE ##
+#########################
+
+# S3 Bucket from a local module (Let's call this bucket C)
+# module "my-bucket-module" {
+#   source     = "./modules/my-module"
+#   bucketname = "tfdemo20220918-mymodulevariablebucket-overriden"
 # }
 
 # Uncomment when the Bucket C is uncommented
 # output "my-bucket-module-id" {
-#   value = module.my-bucket-module.bucketID
+#   value       = module.my-bucket-module.bucketID
 #   description = "Bucket C's terraform ID"
 # }
 
 # Uncomment when the Bucket C is uncommented
 # Note that the root module also has to declare the exported value as sensitive
 # output "my-module-sensitive-value" {
-#   value = module.my-bucket-module.sensitivevalue
+#   value       = module.my-bucket-module.sensitivevalue
 #   description = "Example of an exported sensiive value"
-#   sensitive = true
+#   sensitive   = true
 # }
