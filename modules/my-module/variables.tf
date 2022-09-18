@@ -15,3 +15,10 @@ variable "sourcepath" {
     description = "Path to file for upload"
     default = "./test-files/other-test.txt"
 }
+
+variable "sensitivevalue" {
+    type = string
+    description = "Sample sensitive value"
+    default = "secret"
+    sensitive = true
+}
