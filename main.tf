@@ -10,8 +10,8 @@ terraform {
 # Configure the AWS Provider (access and secret keys should be hidden)
 provider "aws" {
   region     = "ap-southeast-1"
-  access_key = "your-access-key-here"
-  secret_key = "your-secret-key-here"
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 ###################################
