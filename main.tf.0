@@ -58,10 +58,14 @@ resource "aws_s3_object" "object" {
   # etag = filemd5("path/to/file")
 }
 
-# S3 ACL for S3 Bucket B
-resource "aws_s3_bucket_acl" "my-test-bucket-acl" {
+# Blocking public access to S3 Bucket
+resource "aws_s3_bucket_public_access_block" "my-test-bucket-access-block" {
   bucket = aws_s3_bucket.my-test-bucket-referenced.id
-  acl    = "private"
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 # Uncomment when the Bucket B is uncommented
