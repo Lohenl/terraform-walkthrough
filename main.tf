@@ -33,6 +33,12 @@ output "my-test-bucket-id" {
   description = "Bucket A's terraform ID"
 }
 
+output "my-sensitive-value" {
+  value       = var.sensitivevalue
+  description = "Local sensitive value, masked in output but not tfstate"
+  sensitive   = true
+}
+
 #######################
 ## PART 2: VARIABLES ##
 #######################
