@@ -14,23 +14,35 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-###################################
-## PART 1: THE VERY BASIC BUCKET ##
-###################################
-
-# Basic S3 bucket
+# Basic S3 bucket with tags
 resource "aws_s3_bucket" "my-test-bucket" {
-  bucket = "tfdemo20220918-mytestbucket"
+  bucket = var.bucketname
   tags = {
-    Name        = "My bucket"
+    Name        = "My Bucket"
     Environment = "Dev"
   }
 }
 
-# Outputs for all the different bucket names (comment/uncomment where needed)
+# Inserts object to S3 Bucket
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.my-test-bucket.id
+  key    = var.s3objectkey
+  source = var.sourcepath
+}
+
+# Blocking public access to S3 Bucket
+resource "aws_s3_bucket_public_access_block" "my-test-bucket-access-block" {
+  bucket = aws_s3_bucket.my-test-bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 output "my-test-bucket-id" {
   value       = aws_s3_bucket.my-test-bucket.id
-  description = "Bucket A's terraform ID"
+  description = "Bucket's terraform ID"
 }
 
 output "my-sensitive-value" {
@@ -38,68 +50,3 @@ output "my-sensitive-value" {
   description = "Local sensitive value, masked in output but not tfstate"
   sensitive   = true
 }
-
-#######################
-## PART 2: VARIABLES ##
-#######################
-
-# Basic S3 bucket with variable reference (Let's call this Bucket B)
-# resource "aws_s3_bucket" "my-test-bucket-referenced" {
-#   bucket = var.bucketname
-#   tags = {
-#     Name        = "My other bucket"
-#     Environment = "Dev"
-#   }
-# }
-
-# Uploads object to S3 Bucket B (example)
-# resource "aws_s3_object" "object" {
-#   bucket = aws_s3_bucket.my-test-bucket-referenced.id
-#   key    = var.s3objectkey
-#   source = var.sourcepath
-
-#   # The filemd5() function is available in Terraform 0.11.12 and later
-#   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-#   # etag = "${md5(file("path/to/file"))}"
-#   # etag = filemd5("path/to/file")
-# }
-
-# Blocking public access to S3 Bucket
-# resource "aws_s3_bucket_public_access_block" "my-test-bucket-access-block" {
-#   bucket = aws_s3_bucket.my-test-bucket-referenced.id
-
-#   block_public_acls       = true
-#   block_public_policy     = true
-#   ignore_public_acls      = true
-#   restrict_public_buckets = true
-# }
-
-# Uncomment when the Bucket B is uncommented
-# output "my-test-bucket-referenced-id" {
-#   value       = aws_s3_bucket.my-test-bucket-referenced.id
-#   description = "Bucket B's terraform ID"
-# }
-
-#########################
-## PART 3: FROM MODULE ##
-#########################
-
-# S3 Bucket from a local module (Let's call this bucket C)
-# module "my-bucket-module" {
-#   source     = "./modules/my-module"
-#   bucketname = "tfdemo20220918-mymodulevariablebucket-overriden"
-# }
-
-# Uncomment when the Bucket C is uncommented
-# output "my-bucket-module-id" {
-#   value       = module.my-bucket-module.bucketID
-#   description = "Bucket C's terraform ID"
-# }
-
-# Uncomment when the Bucket C is uncommented
-# Note that the root module also has to declare the exported value as sensitive
-# output "my-module-sensitive-value" {
-#   value       = module.my-bucket-module.sensitivevalue
-#   description = "Example of an exported sensiive value"
-#   sensitive   = true
-# }
