@@ -1,3 +1,17 @@
+variable "access_key" {
+  type        = string
+  description = "Access key for AWS provider"
+  default     = "your-access-key-here"
+  sensitive   = true
+}
+
+variable "secret_key" {
+  type        = string
+  description = "Access key for AWS provider"
+  default     = "your-secret-key-here"
+  sensitive   = true
+}
+
 variable "bucketname" {
   type        = string
   description = "Bucket name, must be globally unique"
