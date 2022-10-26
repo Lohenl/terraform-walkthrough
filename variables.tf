@@ -15,7 +15,7 @@ variable "secret_key" {
 variable "bucketname" {
   type        = string
   description = "Bucket name, must be globally unique"
-  default     = "tfdemo20220918-myvariablebucket"
+  default     = "tfdemo20221027-mycoolbucket"
 }
 
 variable "s3objectkey" {
@@ -33,6 +33,6 @@ variable "sourcepath" {
 variable "sensitivevalue" {
   type        = string
   description = "Example of a sensitive value"
-  default     = "secret"
+  default     = "mysecretpassword"
   sensitive   = true
 }
